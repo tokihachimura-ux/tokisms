@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tokisms | SMS Testing</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #f8fafc;
+    }
+    header {
+      padding: 22px;
+      border-bottom: 1px solid #263149;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; color: #34d399; }
+    main { max-width: 850px; margin: auto; padding: 24px; }
+    .hero, .card {
+      background: #151e30;
+      border: 1px solid #2b3850;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    .hero h2 { font-size: 30px; }
+    .muted { color: #a9b5c8; line-height: 1.6; }
+    .tag { color: #fbbf24; font-size: 12px; }
+    button {
+      background: #34d399;
+      color: #06281c;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input, select {
+      padding: 12px;
+      width: 100%;
+      margin: 8px 0 14px;
+      border-radius: 8px;
+      border: 1px solid #394760;
+      background: #0b1020;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TOKISMS</h1>
+    <span>SMS Testing Platform</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="tag">DEMO VERSION</p>
+      <h2>Virtual SMS Testing</h2>
+      <p class="muted">
+        A simple dashboard for authorized SMS testing.
+        Explore the demo before connecting a real provider.
+      </p>
+      <button onclick="showDemo()">Explore demo</button>
+    </section>
+
+    <section class="card">
+      <h3>Service catalog</h3>
+      <label for="country">Select country</label>
+      <select id="country">
+        <option>Demo country</option>
+      </select>
+
+      <label for="service">Select service</label>
+      <select id="service">
+        <option>Authorized SMS testing</option>
+      </select>
+
+      <p class="muted">
+        Sample catalog only. No real numbers or live prices yet.
+      </p>
+      <button onclick="createDemoOrder()">Create demo order</button>
+      <p id="status" class="muted">No order created.</p>
+    </section>
+
+    <p class="tag">
+      Demo only. No real numbers, SMS, OTP, or payments.
+    </p>
+  </main>
+
+  <script>
+    function showDemo() {
+      document.getElementById("status").textContent =
+        "Welcome to Tokisms demo!";
+      document.querySelector(".card").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function createDemoOrder() {
+      document.getElementById("status").textContent =
+        "Demo order created. No number was purchased.";
+    }
+  </script>
+</body>
+</html>
