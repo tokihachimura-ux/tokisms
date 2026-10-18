@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tokisms | SMS Testing</title>
+  <title>SMS Testing</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -54,7 +53,7 @@
 </head>
 <body>
   <header>
-    <h1>TOKISMS</h1>
+    <h1 id="siteName"></h1>
     <span>SMS Testing Platform</span>
   </header>
 
@@ -94,9 +93,16 @@
   </main>
 
   <script>
+    // ====== PALITAN LANG ITO ======
+    const SITE_NAME = "TOKISMS";
+    // ==============================
+
+    document.title = SITE_NAME + " | SMS Testing";
+    document.getElementById("siteName").textContent = SITE_NAME.toUpperCase();
+
     function showDemo() {
       document.getElementById("status").textContent =
-        "Welcome to Tokisms demo!";
+        "Welcome to " + SITE_NAME + " demo!";
       document.querySelector(".card").scrollIntoView({
         behavior: "smooth"
       });
