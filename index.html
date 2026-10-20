@@ -1,117 +1,172 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SMS Testing</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: #f8fafc;
-    }
-    header {
-      padding: 22px;
-      border-bottom: 1px solid #263149;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 { margin: 0; color: #34d399; }
-    main { max-width: 850px; margin: auto; padding: 24px; }
-    .hero, .card {
-      background: #151e30;
-      border: 1px solid #2b3850;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 18px;
-    }
-    .hero h2 { font-size: 30px; }
-    .muted { color: #a9b5c8; line-height: 1.6; }
-    .tag { color: #fbbf24; font-size: 12px; }
-    button {
-      background: #34d399;
-      color: #06281c;
-      border: 0;
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    input, select {
-      padding: 12px;
-      width: 100%;
-      margin: 8px 0 14px;
-      border-radius: 8px;
-      border: 1px solid #394760;
-      background: #0b1020;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokisms — Philippines</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#18233a;--line:#293653;--text:#edf3ff;--muted:#9eacc8;--blue:#6d8cff;--cyan:#43d9cf;--green:#45d49a;--orange:#ffbd66;--red:#ff788a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 0%,#182d52 0,transparent 32%),var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit}.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}
+.sidebar{background:rgba(10,15,30,.88);border-right:1px solid var(--line);padding:25px 16px;display:flex;flex-direction:column;gap:25px}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{height:42px;width:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#081122;font-weight:900;font-size:20px}.brand strong{font-size:20px;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:1px}.nav{display:grid;gap:7px}.nav button{background:transparent;color:var(--muted);text-align:left;padding:12px 14px;border-radius:12px;display:flex;align-items:center;gap:12px}.nav button.active,.nav button:hover{background:#1b2944;color:white}.nav .navicon{width:22px;text-align:center;font-size:17px}.sidebar-note{margin-top:auto;padding:14px;border:1px solid var(--line);border-radius:14px;background:#10182a;color:var(--muted);font-size:12px}
+main{padding:27px clamp(16px,3vw,38px) 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:25px}.eyebrow{color:var(--cyan);font-size:11px;text-transform:uppercase;letter-spacing:1.8px;font-weight:800}.topbar h1{font-size:clamp(23px,3vw,32px);margin:3px 0 0;letter-spacing:-.7px}.userpill{border:1px solid var(--line);border-radius:999px;padding:8px 13px;color:var(--muted);white-space:nowrap;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:24px}.stat,.panel{background:linear-gradient(145deg,rgba(22,32,54,.96),rgba(16,24,42,.96));border:1px solid var(--line);border-radius:18px}.stat{padding:18px}.stat-label{color:var(--muted);font-size:12px}.stat-value{font-size:26px;font-weight:800;margin:5px 0}.stat-foot{font-size:11px;color:var(--green)}.panel{padding:20px;margin-bottom:18px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.sectionhead h2{font-size:18px;margin:0}.sectionhead p{margin:4px 0 0;color:var(--muted);font-size:12px}.search{width:min(100%,330px);background:#0d1526;border:1px solid var(--line);border-radius:11px;padding:11px 13px;color:var(--text);outline:none}.search:focus,input:focus,select:focus{border-color:var(--blue)}.apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.app{background:#111a2d;border:1px solid var(--line);border-radius:15px;padding:14px;text-align:left;color:var(--text);transition:.15s;min-width:0}.app:hover{border-color:#6d8cff;transform:translateY(-2px)}.app.selected{border-color:var(--cyan);box-shadow:0 0 0 1px #43d9cf33}.appicon{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#243454;font-size:22px;margin-bottom:12px;font-weight:800}.appname{font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.appmeta{color:var(--muted);font-size:11px;margin-top:3px}.appbottom{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:14px}.price{font-weight:800;font-size:13px}.tag{font-size:10px;color:var(--cyan);background:#16383b;padding:4px 7px;border-radius:999px}.two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.field{display:grid;gap:6px;margin-bottom:13px}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;padding:11px 12px;background:#0d1526;border:1px solid var(--line);border-radius:10px;color:var(--text);outline:none}.btn{border-radius:11px;padding:11px 15px;font-weight:750;background:linear-gradient(135deg,var(--blue),#8b7cff);color:white}.btn.secondary{background:#202d48;border:1px solid var(--line);color:var(--text)}.btn.full{width:100%}.btn:disabled{opacity:.45;cursor:not-allowed}.notice{border:1px solid #64502c;background:#2c2418;color:#f4d4a2;border-radius:12px;padding:12px 13px;font-size:12px;margin:12px 0}.muted{color:var(--muted)}.payment-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}.method{border:1px solid var(--line);background:#111a2d;color:var(--text);border-radius:12px;padding:13px 8px;text-align:center}.method.active{border-color:var(--cyan);background:#122d35}.method b{display:block;margin-bottom:3px}.qrbox{min-height:130px;display:grid;place-items:center;text-align:center;border:1px dashed #52617f;border-radius:13px;background:#0d1526;color:var(--muted);padding:15px;margin-bottom:13px}.qrplaceholder{width:76px;height:76px;border:7px solid white;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0/16px 16px;margin:0 auto 8px;opacity:.8}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{font-size:11px;color:var(--muted);font-weight:650}.status{display:inline-block;border-radius:99px;padding:4px 8px;font-size:10px;background:#24304a;color:#b6c5e2}.status.pending{background:#3a2b17;color:#ffd18c}.inboxitem{border:1px solid var(--line);background:#10192b;border-radius:13px;padding:14px;margin-bottom:10px}.inboxrow{display:flex;justify-content:space-between;gap:10px}.inboxitem h3{font-size:14px;margin:0}.inboxitem p{font-size:12px;color:var(--muted);margin:5px 0}.otpcode{font-size:22px;letter-spacing:4px;font-weight:850;color:var(--cyan);margin:8px 0}.empty{border:1px dashed var(--line);border-radius:12px;padding:25px;text-align:center;color:var(--muted);font-size:13px}.page{display:none}.page.active{display:block}.mobilemenu{display:none}.footnote{font-size:11px;color:var(--muted);margin-top:15px}
+@media(max-width:1050px){.apps{grid-template-columns:repeat(3,minmax(0,1fr))}.two-col{grid-template-columns:1fr}.sidebar{width:215px}.shell{grid-template-columns:215px minmax(0,1fr)}}
+@media(max-width:720px){.shell{display:block}.sidebar{padding:13px 14px;border-right:0;border-bottom:1px solid var(--line);gap:12px}.brand{padding:0 2px}.nav{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}.nav button{justify-content:center;text-align:center;padding:9px 4px;display:grid;gap:3px;font-size:11px}.navicon{margin:auto}.sidebar-note{display:none}main{padding:19px 13px 35px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:span 2}.apps{grid-template-columns:repeat(2,minmax(0,1fr))}.sectionhead{align-items:flex-start;flex-direction:column}.sectionhead .search{width:100%}.topbar{align-items:flex-start}.userpill{font-size:11px}.panel{padding:15px}.payment-methods{grid-template-columns:1fr 1fr 1fr}.stat-value{font-size:22px}}
+</style>
 </head>
 <body>
-  <header>
-    <h1 id="siteName"></h1>
-    <span>SMS Testing Platform</span>
-  </header>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brandmark">T</div><div><strong>tokisms</strong><small>PHILIPPINES · DEMO</small></div></div>
+  <nav class="nav">
+    <button class="active" data-page="buy"><span class="navicon">▦</span>Buy</button>
+    <button data-page="recharge"><span class="navicon">＋</span>Recharge</button>
+    <button data-page="inbox"><span class="navicon">✉</span>OTP Inbox</button>
+    <button data-page="history"><span class="navicon">↻</span>References</button>
+  </nav>
+  <div class="sidebar-note"><b>Demo mode only</b><br>Walang totoong number, OTP, payment, o purchase na pinoproseso sa version na ito.</div>
+</aside>
+<main>
+  <div class="topbar">
+    <div><div class="eyebrow">SMS verification dashboard</div><h1 id="pageTitle">Buy a service</h1></div>
+    <div class="userpill">🇵🇭 Philippines <span style="color:var(--green)">●</span> Demo</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-label">Available demo balance</div><div class="stat-value" id="balance">₱100.00</div><div class="stat-foot">Sample balance · not real funds</div></div>
+    <div class="stat"><div class="stat-label">Demo requests</div><div class="stat-value" id="requestCount">0</div><div class="stat-foot">Created in this browser session</div></div>
+    <div class="stat"><div class="stat-label">Active demo inboxes</div><div class="stat-value" id="activeCount">0</div><div class="stat-foot">20-minute mock timer</div></div>
+  </div>
 
-  <main>
-    <section class="hero">
-      <p class="tag">DEMO VERSION</p>
-      <h2>Virtual SMS Testing</h2>
-      <p class="muted">
-        A simple dashboard for authorized SMS testing.
-        Explore the demo before connecting a real provider.
-      </p>
-      <button onclick="showDemo()">Explore demo</button>
-    </section>
+  <section class="page active" id="page-buy">
+    <div class="panel">
+      <div class="sectionhead"><div><h2>Choose a platform</h2><p>Philippines only · Presyo ay sample at ikaw ang puwedeng mag-edit sa code.</p></div><input class="search" id="appSearch" placeholder="⌕ Search app or platform..."></div>
+      <div class="apps" id="apps"></div>
+      <div class="notice">Demo only: ang “Buy” ay gagawa lang ng mock request. Hindi ito kumukuha ng totoong numero o OTP. Gamitin lamang ang real integrations ayon sa provider at platform rules.</div>
+    </div>
+  </section>
 
-    <section class="card">
-      <h3>Service catalog</h3>
-      <label for="country">Select country</label>
-      <select id="country">
-        <option>Demo country</option>
-      </select>
+  <section class="page" id="page-recharge">
+    <div class="two-col">
+      <div class="panel">
+        <div class="sectionhead"><div><h2>Recharge demo balance</h2><p>Pumili ng payment method at maglagay ng sample reference.</p></div></div>
+        <div class="payment-methods">
+          <button class="method active" data-method="GCash"><b>🔵 GCash</b><small class="muted">E-wallet</small></button>
+          <button class="method" data-method="Maya"><b>🟢 Maya</b><small class="muted">E-wallet</small></button>
+          <button class="method" data-method="MariBank"><b>🟣 MariBank</b><small class="muted">Bank</small></button>
+        </div>
+        <div class="qrbox"><div><div class="qrplaceholder"></div><b id="qrMethod">GCash QR placeholder</b><div class="muted" style="font-size:11px">Palitan ng verified merchant QR kapag may secure payment setup na.</div></div></div>
+        <form id="rechargeForm">
+          <div class="field"><label>Amount (PHP)</label><input id="amount" type="number" min="1" step="1" placeholder="e.g. 100" required></div>
+          <div class="field"><label>Payment reference number</label><input id="reference" maxlength="80" placeholder="Enter reference number" required></div>
+          <button class="btn full" type="submit">Submit demo reference</button>
+        </form>
+        <div class="notice">Huwag magpakita ng personal QR o mangolekta ng totoong payment details sa public demo. Ang reference ay hindi awtomatikong patunay ng bayad.</div>
+      </div>
+      <div class="panel">
+        <div class="sectionhead"><div><h2>Find a reference</h2><p>Search sa mga demo reference na na-submit sa browser na ito.</p></div></div>
+        <input class="search" style="width:100%;margin-bottom:14px" id="refSearch" placeholder="Search reference / method / status...">
+        <div class="tablewrap"><table><thead><tr><th>Method</th><th>Reference</th><th>Amount</th><th>Status</th></tr></thead><tbody id="refRows"></tbody></table></div>
+      </div>
+    </div>
+  </section>
 
-      <label for="service">Select service</label>
-      <select id="service">
-        <option>Authorized SMS testing</option>
-      </select>
+  <section class="page" id="page-inbox">
+    <div class="panel">
+      <div class="sectionhead"><div><h2>Receiving OTP</h2><p>Demo inbox · bawat mock request ay may 20-minute timer.</p></div><button class="btn secondary" id="clearInbox">Clear demo inbox</button></div>
+      <div class="notice">Mga mensahe sa ibaba ay kathang-isip na sample data. Hindi sila OTP na galing sa mga platform at hindi dapat gamitin sa pag-login.</div>
+      <div id="inboxList"><div class="empty">Wala pang demo requests. Pumili muna ng platform sa Buy at i-click ang Buy demo.</div></div>
+    </div>
+  </section>
 
-      <p class="muted">
-        Sample catalog only. No real numbers or live prices yet.
-      </p>
-      <button onclick="createDemoOrder()">Create demo order</button>
-      <p id="status" class="muted">No order created.</p>
-    </section>
-
-    <p class="tag">
-      Demo only. No real numbers, SMS, OTP, or payments.
-    </p>
-  </main>
-
-  <script>
-    // ====== PALITAN LANG ITO ======
-    const SITE_NAME = "TOKISMS";
-    // ==============================
-
-    document.title = SITE_NAME + " | SMS Testing";
-    document.getElementById("siteName").textContent = SITE_NAME.toUpperCase();
-
-    function showDemo() {
-      document.getElementById("status").textContent =
-        "Welcome to " + SITE_NAME + " demo!";
-      document.querySelector(".card").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-
-    function createDemoOrder() {
-      document.getElementById("status").textContent =
-        "Demo order created. No number was purchased.";
-    }
-  </script>
+  <section class="page" id="page-history">
+    <div class="panel">
+      <div class="sectionhead"><div><h2>Payment references</h2><p>Search and review demo reference submissions.</p></div><input class="search" id="historySearch" placeholder="Search reference..." /></div>
+      <div class="tablewrap"><table><thead><tr><th>Date</th><th>Method</th><th>Reference</th><th>Amount</th><th>Status</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+    </div>
+  </section>
+  <p class="footnote">TOKISMS DEMO • Frontend prototype only • No real payment processing, number provisioning, or third-party OTP retrieval.</p>
+</main>
+</div>
+<script>
+/* EDIT PRICES HERE: change the price value for each platform. These are sample prices only. */
+const platforms = [
+ {name:"Facebook",icon:"f",color:"#2463eb",price:15},
+ {name:"Grab",icon:"G",color:"#13a66b",price:12},
+ {name:"JoyRide",icon:"JR",color:"#f0a52b",price:10},
+ {name:"Playtime",icon:"▶",color:"#725cf4",price:10},
+ {name:"Google Account",icon:"G",color:"#e6edf8",price:18},
+ {name:"WhatsApp",icon:"◉",color:"#19b66c",price:15},
+ {name:"UNO",icon:"U",color:"#ec4c58",price:10},
+ {name:"Foodpanda",icon:"p!",color:"#f65a92",price:12},
+ {name:"Telegram",icon:"➤",color:"#299bd7",price:12},
+ {name:"BingoPlus",icon:"B+",color:"#c6a34c",price:12},
+ {name:"Shopee",icon:"S",color:"#f17a35",price:12},
+ {name:"Lazada",icon:"L",color:"#8661e8",price:12}
+];
+let balance=100, selectedMethod="GCash", requests=[], refs=[];
+const money=n=>"₱"+Number(n).toFixed(2);
+const $=id=>document.getElementById(id);
+function renderApps(filter=""){
+ const host=$("apps");host.innerHTML="";
+ const matches=platforms.filter(p=>p.name.toLowerCase().includes(filter.toLowerCase()));
+ if(!matches.length){host.innerHTML='<div class="empty" style="grid-column:1/-1">Walang app na tumugma sa search.</div>';return}
+ matches.forEach(p=>{
+  const b=document.createElement("button");b.className="app";
+  b.innerHTML=`<div class="appicon" style="color:${p.color}">${p.icon}</div><div class="appname">${p.name}</div><div class="appmeta">🇵🇭 Philippines</div><div class="appbottom"><span class="price">${money(p.price)}</span><span class="tag">DEMO</span></div>`;
+  b.addEventListener("click",()=>createRequest(p.name,p.price));host.appendChild(b);
+ });
+}
+function createRequest(name,price){
+ if(balance<price){alert("Kulang ang demo balance. Recharge demo balance muna.");return}
+ balance-=price;
+ const item={id:Date.now()+Math.random(),name,price,created:Date.now(),expires:Date.now()+20*60*1000,code:String(Math.floor(100000+Math.random()*900000)),status:"Demo only"};
+ requests.unshift(item);updateStats();renderInbox();alert("Demo request created for "+name+". Hindi ito totoong number o OTP.");
+}
+function fmtTime(ms){if(ms<=0)return "Expired";let s=Math.floor(ms/1000);return Math.floor(s/60)+"m "+String(s%60).padStart(2,"0")+"s left"}
+function renderInbox(){
+ const host=$("inboxList");
+ if(!requests.length){host.innerHTML='<div class="empty">Wala pang demo requests. Pumili muna ng platform sa Buy at i-click ang Buy demo.</div>';return}
+ host.innerHTML=requests.map(r=>`<div class="inboxitem"><div class="inboxrow"><h3>${r.name} · 🇵🇭 Demo</h3><span class="status ${Date.now()>r.expires?'pending':''}" data-exp="${r.id}">${Date.now()>r.expires?'Expired':fmtTime(r.expires-Date.now())}</span></div><p>Sample number: +63 9XX XXX XXXX · Request ID: DEMO-${String(r.id).replace('.','').slice(-6)}</p><div class="otpcode">••••••</div><p>Sample message: “Tokisms demo message. This is not a real verification code.”</p><p class="muted">The code above is intentionally hidden; no real OTP is retrieved.</p></div>`).join("");
+}
+function updateStats(){
+ $("balance").textContent=money(balance);$("requestCount").textContent=requests.length;
+ $("activeCount").textContent=requests.filter(r=>Date.now()<r.expires).length;
+}
+function renderRefs(query=""){
+ const q=query.toLowerCase();
+ const rows=refs.filter(r=>(r.reference+" "+r.method+" "+r.status).toLowerCase().includes(q));
+ const html=rows.map(r=>`<tr><td>${r.method}</td><td>${escapeHtml(r.reference)}</td><td>${money(r.amount)}</td><td><span class="status pending">${r.status}</span></td></tr>`).join("");
+ $("refRows").innerHTML=html||'<tr><td colspan="4" class="muted">No matching demo references.</td></tr>';
+ $("historyRows").innerHTML=refs.filter(r=>(r.reference+" "+r.method).toLowerCase().includes($("historySearch").value.toLowerCase())).map(r=>`<tr><td>${new Date(r.created).toLocaleString()}</td><td>${r.method}</td><td>${escapeHtml(r.reference)}</td><td>${money(r.amount)}</td><td><span class="status pending">${r.status}</span></td></tr>`).join("")||'<tr><td colspan="5" class="muted">No matching demo references.</td></tr>';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b===btn));
+ document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+btn.dataset.page));
+ $("pageTitle").textContent=({buy:"Buy a service",recharge:"Recharge demo balance",inbox:"Receiving OTP",history:"Payment references"})[btn.dataset.page];
+}));
+$("appSearch").addEventListener("input",e=>renderApps(e.target.value));
+document.querySelectorAll(".method").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll(".method").forEach(b=>b.classList.toggle("active",b===btn));selectedMethod=btn.dataset.method;$("qrMethod").textContent=selectedMethod+" QR placeholder";
+}));
+$("rechargeForm").addEventListener("submit",e=>{
+ e.preventDefault();const amount=Number($("amount").value),reference=$("reference").value.trim();
+ if(!Number.isFinite(amount)||amount<=0||!reference){alert("Maglagay ng valid na demo amount at reference.");return}
+ if(refs.some(r=>r.reference.toLowerCase()===reference.toLowerCase())){alert("May kaparehong reference na sa demo list.");return}
+ refs.unshift({method:selectedMethod,reference,amount,status:"Pending demo review",created:Date.now()});
+ $("amount").value="";$("reference").value="";renderRefs($("refSearch").value);alert("Na-submit ang demo reference. Hindi ito nagdagdag ng balance at walang totoong payment na na-verify.");
+});
+$("refSearch").addEventListener("input",e=>renderRefs(e.target.value));
+$("historySearch").addEventListener("input",()=>renderRefs($("refSearch").value));
+$("clearInbox").addEventListener("click",()=>{requests=[];updateStats();renderInbox()});
+setInterval(()=>{updateStats();document.querySelectorAll("[data-exp]").forEach(el=>{const r=requests.find(x=>String(x.id)===el.dataset.exp);if(r)el.textContent=Date.now()>r.expires?"Expired":fmtTime(r.expires-Date.now())})},1000);
+renderApps();updateStats();renderInbox();renderRefs();
+</script>
 </body>
 </html>
+'''
+path = Path("/mnt/data/tokisms_demo.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created {path} ({path.stat().st_size} bytes)")
